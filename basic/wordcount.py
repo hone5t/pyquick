@@ -47,6 +47,33 @@ import sys
 
 ###
 
+def get_dict(filename):
+  file = open(filename,'rU')
+  text = file.read()
+  dict_words = {}
+  for word in text.split():
+    word = word.lower()
+    if(dict_words.get(word) == None):
+      dict_words[word] = 1
+    else:
+      dict_words[word] += 1
+  file.close()
+  return dict_words
+
+
+
+def print_words(filename):
+  result = get_dict(filename)
+
+  for key in sorted(result.keys()):
+    print key,result[key]
+
+def print_top(filename):
+  result = get_dict(filename)
+
+  for key in sorted(result.keys(),key=result.get,reverse=True):
+    print key,result[key]
+
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main():
